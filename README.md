@@ -8,8 +8,6 @@ AI voice enrollment advisor built with ElevenLabs Conversational AI and Make —
 
 ## 🔴 Live Demo
 **[Talk to Ava →](https://agentic-ai-voice-assistant.vercel.app/)**
-**[View Live Google Sheets Backend →](https://docs.google.com/spreadsheets/d/1T48ZseStBAiHrSbDVvqN_x62ov0guUenWVzrdOSce1Y/edit?usp=sharing)**
-> Every booking Ava confirms shows up here in real time.
 
 ## How It Works
 1. Caller visits the landing page and starts a voice conversation with **Ava**
