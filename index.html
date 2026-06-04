@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ava — Oxford English Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #FFFFFF;
+    --warm: #FFF8EC;
+    --gold: #D4930A;
+    --gold-light: #F5C842;
+    --dark: #1C1A16;
+    --muted: #7A6F60;
+    --border: rgba(28,26,22,0.08);
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--cream);
+    color: var(--dark);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 2.5rem;
+    background: rgba(255,255,255,0.9);
+    backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    color: var(--dark);
+    letter-spacing: -0.01em;
+  }
+
+  .nav-logo span { color: var(--gold); }
+
+  .nav-badge {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border: 0.5px solid var(--border);
+    padding: 0.3rem 0.75rem;
+    border-radius: 100px;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 8rem 2.5rem 4rem;
+    gap: 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .hero-left { max-width: 520px; }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+  }
+
+  .eyebrow::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.8rem, 5vw, 4.2rem);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    color: var(--dark);
+    margin-bottom: 1.5rem;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-desc {
+    font-size: 1.05rem;
+    font-weight: 300;
+    line-height: 1.75;
+    color: var(--muted);
+    margin-bottom: 2.5rem;
+    max-width: 420px;
+  }
+
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--dark);
+    color: var(--cream);
+    font-family: var(--sans);
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: 0.875rem 1.75rem;
+    border-radius: 100px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn-primary:hover { background: #333; transform: translateY(-1px); }
+
+  .btn-secondary {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: var(--muted);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: color 0.2s;
+  }
+
+  .btn-secondary:hover { color: var(--dark); }
+
+  /* ─── WIDGET CARD ─── */
+  .hero-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .widget-wrap {
+    background: #fff;
+    border-radius: 24px;
+    border: 0.5px solid var(--border);
+    padding: 2rem;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 32px 80px rgba(28,26,22,0.08);
+  }
+
+  .widget-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #F5C842, #D4930A);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    color: #fff;
+    flex-shrink: 0;
+  }
+
+  .widget-name {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    color: var(--dark);
+    line-height: 1.2;
+  }
+
+  .widget-role {
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-top: 0.2rem;
+  }
+
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    background: #4CAF50;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 0.3rem;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .widget-body {
+    margin-bottom: 0;
+  }
+
+  .chat-bubble {
+    background: var(--warm);
+    border-radius: 16px 16px 16px 4px;
+    padding: 1rem 1.25rem;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--dark);
+    margin-bottom: 1rem;
+    font-weight: 300;
+  }
+
+  .chat-bubble strong { font-weight: 500; }
+
+  elevenlabs-convai {
+    display: block;
+    width: 100%;
+    margin-top: 1.5rem;
+  }
+
+  /* ─── FEATURES ─── */
+  .features {
+    padding: 6rem 2.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    text-align: center;
+    letter-spacing: -0.02em;
+    margin-bottom: 3.5rem;
+    line-height: 1.2;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .feature-card {
+    background: #fff;
+    border: 0.5px solid var(--border);
+    border-radius: 16px;
+    padding: 1.75rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(28,26,22,0.07);
+  }
+
+  .feature-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--warm);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+  }
+
+  .feature-title {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    margin-bottom: 0.5rem;
+    color: var(--dark);
+  }
+
+  .feature-desc {
+    font-size: 0.85rem;
+    line-height: 1.65;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  /* ─── HOW IT WORKS ─── */
+  .how {
+    background: var(--dark);
+    color: var(--cream);
+    padding: 6rem 2.5rem;
+    text-align: center;
+  }
+
+  .how .section-title { color: var(--cream); margin-bottom: 3.5rem; }
+  .how .section-label { color: var(--gold-light); }
+
+  .steps {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0;
+    flex-wrap: wrap;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .step {
+    flex: 1;
+    min-width: 180px;
+    max-width: 220px;
+    padding: 1rem 1.5rem;
+    position: relative;
+  }
+
+  .step:not(:last-child)::after {
+    content: '→';
+    position: absolute;
+    right: -12px;
+    top: 1.2rem;
+    color: var(--gold);
+    font-size: 1rem;
+  }
+
+  .step-num {
+    font-family: var(--serif);
+    font-size: 2.5rem;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 0.75rem;
+  }
+
+  .step-title {
+    font-family: var(--serif);
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--cream);
+  }
+
+  .step-desc {
+    font-size: 0.8rem;
+    line-height: 1.6;
+    color: rgba(250,248,243,0.55);
+    font-weight: 300;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    padding: 2.5rem;
+    text-align: center;
+    border-top: 0.5px solid var(--border);
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  footer strong { font-weight: 500; color: var(--dark); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.25rem; }
+    .hero {
+      grid-template-columns: 1fr;
+      padding: 6rem 1.25rem 3rem;
+      gap: 3rem;
+      text-align: center;
+    }
+    .hero-left { max-width: 100%; }
+    .eyebrow { margin: 0 auto 1.5rem; }
+    .hero-desc { max-width: 100%; }
+    .hero-actions { justify-content: center; }
+    .hero-right { order: -1; }
+    .widget-wrap { max-width: 100%; }
+    .step:not(:last-child)::after { display: none; }
+    .features, .how { padding: 4rem 1.25rem; }
+  }
+
+  /* fade-in on load */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-left, .hero-right {
+    animation: fadeUp 0.7s ease both;
+  }
+
+  .hero-right { animation-delay: 0.15s; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Ox<span>ford</span></div>
+  <div class="nav-badge">Live Demo</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="eyebrow">AI Enrollment Advisor</div>
+    <h1>Meet <em>Ava</em>,<br>your guide to fluency.</h1>
+    <p class="hero-desc">
+      Ava is Oxford English Academy's intelligent enrollment advisor — available around the clock to answer your questions, walk you through our programs, and reserve your free demo class spot.
+    </p>
+    <div class="hero-actions">
+      <a href="#talk" class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg>
+        Talk to Ava
+      </a>
+      <a href="#how" class="btn-secondary">
+        How it works →
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-right" id="talk">
+    <div class="widget-wrap">
+      <div class="widget-header">
+        <div class="avatar">A</div>
+        <div>
+          <div class="widget-name">Ava</div>
+          <div class="widget-role">
+            <span class="status-dot"></span>Enrollment Advisor · Oxford
+          </div>
+        </div>
+      </div>
+      <div class="widget-body">
+        <div class="chat-bubble">
+          Hi there! 👋 I'm <strong>Ava</strong> from Oxford English Academy. I'd love to help you find the perfect English program. Feel free to ask me anything or click the mic to start talking!
+        </div>
+      </div>
+      <elevenlabs-convai agent-id="agent_4601kt5ybsvtfd9aeae3tez4ds8w"></elevenlabs-convai>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+  <div class="section-label">What Ava can do</div>
+  <h2 class="section-title">Everything you need,<br>answered instantly.</h2>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">📚</div>
+      <div class="feature-title">Program Details</div>
+      <p class="feature-desc">Ask about our English courses, levels, class structure, and what makes Oxford different from other academies.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">💰</div>
+      <div class="feature-title">Fees & Schedules</div>
+      <p class="feature-desc">Get clear, honest answers on tuition, batch timings, and flexible payment options — no surprises.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🎓</div>
+      <div class="feature-title">Free Demo Class</div>
+      <p class="feature-desc">Reserve your spot in our free Saturday demo class and experience a full live session before committing.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📋</div>
+      <div class="feature-title">Instant Enrollment</div>
+      <p class="feature-desc">Ready to join? Ava connects you directly to our enrollment team to get everything set up right away.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div class="section-label">The process</div>
+  <h2 class="section-title">Three steps to your<br>first class.</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-title">Chat with Ava</div>
+      <p class="step-desc">Ask about programs, fees, or anything on your mind — in your own words.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-title">Book a Demo</div>
+      <p class="step-desc">Reserve your free Saturday demo class slot right in the conversation.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-title">Start Learning</div>
+      <p class="step-desc">Experience the class, enroll if you love it, and begin your fluency journey.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Built for <strong>Oxford English Academy</strong> · Powered by ElevenLabs Conversational AI</p>
+</footer>
+
+<script src="https://elevenlabs.io/convai-widget/index.js" async></script>
+
+</body>
+</html>
